@@ -1,1 +1,1 @@
-nothing here
+generated javascript files go into this directory
