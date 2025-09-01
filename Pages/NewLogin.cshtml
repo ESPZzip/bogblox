@@ -1,0 +1,119 @@
+﻿@page
+@model NewLoginModel
+
+@inject IScriptManager ScriptManager
+@inject IStyleManager CSSManager
+
+@{ 
+    CSSManager.PageCSS.Add("~/CSS/Pages/IDE/Login.css");
+    CSSManager.PageCSS.Add("~/CSS/Base/CSS/iFrameLogin.css");
+}
+<!--[if IE 7]>
+<style>        
+    #signInButtonPanel a 
+    {
+        margin-right: 143px;
+    }
+</style>
+<![endif]-->
+<h1>@(Model.LoginLangResources["Heading.LoginRoblox"])</h1>
+<div>
+    <form method="post" id="loginForm">
+        @{
+            ScriptManager.PageScripts.Add("~/js/Login/Login.js");
+            CSSManager.PageCSS.Add("~/CSS/Pages/Login/Login.css");
+        }
+        <partial name="_ValidationScriptsPartial" />
+        @Html.ValidationSummary(true)
+        <div id="loginarea" class="divider-bottom">
+            <div id="leftArea">
+                <div id="loginPanel">
+                    <table id="logintable">
+                        <tr id="username">
+                            <td><label asp-for="Username" class="form-label">@Model.LoginLangResources["Label.UsernameWithColumn"]</label></td>
+                            <td><input asp-for="Username" class="text-box text-box-medium" /></td>
+                        </tr>
+                        <tr id="password">
+                            <td><label asp-for="Password" class="form-label">@Model.LoginLangResources["Label.PasswordWithColumn"]</label></td>
+                            <td><input asp-for="Password" class="text-box text-box-medium" type="password" /></td>
+                        </tr>
+                    </table>
+                    <div>
+                    </div>
+                    <div>
+                        <div id="forgotPasswordPanel">
+                            <a class="text-link" href="/Login/ResetPasswordRequest.aspx" target="_blank">@Model.LoginLangResources["Action.ForgotPasswordQuestion"]</a>
+                        </div>
+                        <div id="signInButtonPanel">
+                            <a  roblox-js-onclick class="btn-medium btn-neutral">@Model.LoginLangResources["Action.SignIn"]</a>
+                            <a  roblox-js-oncancel class="btn-medium btn-negative">@Model.LoginLangResources["Action.Cancel"]</a>
+                        </div>
+                        <div class="clearFloats">
+                        </div>
+                    </div>
+                    <span id="fb-root">
+                                <div id="SplashPageConnect" class="fbSplashPageConnect">
+                                    <a class="facebook-login" href="/Facebook/SignIn?returnTo=/My/Home.aspx" ref="form-facebook">
+                                        <span class="left"></span>
+                                        <span class="middle">@Model.LoginLangResources["Action.LoginWithFacebook"]<span>@Model.LoginLangResources["Action.LoginWithFacebook"]</span></span>
+                                        <span class="right"></span>
+                                    </a>       
+                                </div>
+                    </span>
+                </div>
+            </div>
+            <div id="rightArea" class="divider-left">
+                <div id="signUpPanel" class="FrontPageLoginBox">
+                    <p class="text">@Model.LoginLangResources["Label.NonAMemberQuestion"]</p>
+                    <h2>@Model.LoginLangResources["Heading.SignUpMakeFriends"]</h2>
+                    <p class="text">What is your birthday?</p>
+                    <select id="MonthSelect" class="form-select" name="Month">
+                        <option>@Model.ControlsLangResources["Label.Month"]</option>
+                    </select>
+                    <select id="DaySelect" class="form-select" name="Day">
+                        <option>@Model.ControlsLangResources["Label.Day"]</option>
+                    </select>
+                    <select id="YearSelect" class="form-select" name="Year">
+                        <option>@Model.ControlsLangResources["Label.Year"]</option>
+                    </select>
+                    <p class="footnote" id="disclaimer">Your birthday will not be given out to any third party!</p>
+    <a  roblox-js-onsignup class="btn-medium btn-primary">@Model.LoginLangResources["Action.SignUpCapitalized"]</a>                    </div>
+            </div>
+        </div>
+        <input asp-for="ReturnUrl" type="hidden" />
+    </form>
+</div>
+<script type="text/javascript">
+    if (typeof Roblox === "undefined") {
+        Roblox = {};
+    }
+    if (typeof Roblox.Login === "undefined") {
+        Roblox.Login = {};
+    }
+
+    Roblox.Login.Resources = {
+        //<sl:translate>
+        january: "@Model.ControlsLangResources["Label.January"]"
+		, february: "@Model.ControlsLangResources["Label.February"]"
+		, march: "@Model.ControlsLangResources["Label.March"]"
+		, april: "@Model.ControlsLangResources["Label.April"]"
+		, may: "@Model.ControlsLangResources["Label.May"]"
+		, june: "@Model.ControlsLangResources["Label.June"]"
+		, july: "@Model.ControlsLangResources["Label.July"]"
+		, august: "@Model.ControlsLangResources["Label.August"]"
+		, september: "@Model.ControlsLangResources["Label.September"]"
+		, october: "@Model.ControlsLangResources["Label.October"]"
+		, november: "@Model.ControlsLangResources["Label.November"]"
+		, december: "@Model.ControlsLangResources["Label.December"]"
+        //</sl:translate>
+    };
+</script>
+<div id="guestarea">
+    <h2>@Model.LoginLangResources["Label.AccountNotNeeded"]</h2>
+    <br/>
+    <p class="text">@Model.LoginLangResources["Label.StartPlaying"] <a  href="/Games.aspx" class="btn-small btn-neutral" id="guestButton">@Model.LoginLangResources["Action.PlayAsGuest"]</a></p>
+    
+</div>
+<script type="text/javascript">
+    $(function() {{ }});
+</script>
